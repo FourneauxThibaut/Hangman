@@ -72,10 +72,18 @@ function addLetter(userInput)
     }
     // mettre la lettre en vert
 }
+String.prototype.replaceAt = function(index, replacement) {
+    return this.substr(0, index) + replacement + this.substr(index + replacement.length);
+}
 function removeLetter()
 {
     // mettre la lettre en rouge
 }
+
+
+
+
+
 
 document.getElementById('run').addEventListener('click', function()
 {
@@ -84,6 +92,9 @@ document.getElementById('run').addEventListener('click', function()
     init();
     console.log(randomWord);
 });
+
+
+
 
 alphabet.forEach(element => {
     let upper = element.toUpperCase();
@@ -94,6 +105,8 @@ alphabet.forEach(element => {
         console.log(lives);
     })
 });
+
+
 
 console.log(randomWord);
 init();
