@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/reset.css">
+    <link rel="stylesheet" href="./assets/style.css">
+    <link rel="shortcut icon" href="./assets/storage/etrier.svg" type="image/x-icon">
+    <title>Hangman</title>
+</head>
+<body>
+    <header>
+        <h1>Hangmans</h1>
+    </header>
+    <main>
+        <section class="hangmansImage">
+            <canvas class="image">
+            </canvas>
+            <section class="word">
+                <p id="word"></p>
+            </section>
+        </section>
+        <section class="hangmansContent">
+            <section class="hangmansOutput">
+                <div id="letterA">a</div>
+                <div id="letterB">b</div>
+                <div id="letterC">c</div>
+                <div id="letterD">d</div>
+                <div id="letterE">e</div>
+                <div id="letterF">f</div>
+                <div id="letterG">g</div>
+                <div id="letterH">h</div>
+                <div id="letterI">i</div>
+                <div id="letterJ">j</div>
+                <div id="letterK">k</div>
+                <div id="letterL">l</div>
+                <div id="letterM">m</div>
+                <div id="letterN">n</div>
+                <div id="letterO">o</div>
+                <div id="letterP">p</div>
+                <div id="letterQ">q</div>
+                <div id="letterR">r</div>
+                <div id="letterS">s</div>
+                <div id="letterT">t</div>
+                <div id="letterU">u</div>
+                <div id="letterV">v</div>
+                <div id="letterW">w</div>
+                <div id="letterX">x</div>
+                <div id="letterY">y</div>
+                <div id="letterZ">z</div>
+            </section>
+            <section class="hangmansInput">
+                <form action="#" method="post">
+                    <div class="field">
+                        <input type="text" name="guess" id="guess" placeholder="Guess"/>
+                    </div>
+                    <div class="actions">
+                        <button type="button" id="run">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+                <section class="info">
+                    <p id="userInfo">You have 6 lives left.</p>
+                </section>
+            </section>
+        </section>
+    </main>
+    <footer>
+        <a href="https://github.com/FourneauxThibaut">Fourneaux Thibaut</a>
+    </footer>
+    <script src="./assets/wordList.js"></script>
+    <script src="./assets/script.js"></script>
+</body>
+</html>
