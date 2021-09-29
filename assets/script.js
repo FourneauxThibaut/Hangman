@@ -5,8 +5,12 @@ const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm
 const drawing = ['head', 'body', 'lArm', 'rArm', 'lLegs', 'rLegs'];
 const target = document.getElementById('word');
 
-// initialise les variable ou les remet à 0 pour refaire une partie.
-// 🇮​​​​​🇳​​​​​🇮​​​​​🇹​​​​​
+/**=======================================================================================================================
+ **                                                     Init
+ *
+ *?  Reset all variables and class added during last game
+ *@return randomWord
+ *=======================================================================================================================**/                                
 function init()
 {
     // take a random animal from wordList.js
@@ -37,8 +41,15 @@ function init()
     return randomWord;
 }
 
-// vérifie si la lettre ou le mot correspond.
-// 🇬​​​​​🇺​​​​​🇪​​​​​🇸​​​​​🇸​​​​​
+/**=======================================================================================================================
+ **                                                     Guess
+ *
+ *?  compare if the number is the same as function 
+ *@param userInput  
+ *@use addLetter
+ *@use loseLive
+ *@use removeLetter
+ *=======================================================================================================================**/
 function guess(userInput){
     let temp = 0;
         // look if input is more then a letter
@@ -56,6 +67,7 @@ function guess(userInput){
             else
             {
                 loseLive();
+                result();
             }
         }
         // look if it's only one letter
@@ -79,6 +91,12 @@ function guess(userInput){
         } 
 }
 
+/**=======================================================================================================================
+ **                                                     UpdateLives
+ *
+ *?  update the number of tries in the p field selected as "userInfo"
+ *@param left
+ *=======================================================================================================================**/
 // mets à jour l'affichage des vies.
 // 🇺​​​​​🇵​​​​​🇩​​​​​🇦​​​​​🇹​​​​​🇪​​​​​🇱​​​​​🇮​​​​​🇻​​​​​🇪​​​​​🇸
 function updateLives(left)
@@ -87,24 +105,46 @@ function updateLives(left)
     userInfo.textContent = 'you have '+left+' lives left.';
 }
 
-// retire une vie et dessine une partie du pendu.
-// 🇱​​​​​🇴​​​​​🇸​​​​​🇪​​​​​🇱​​​​​🇮​​​​​🇻​​​​​🇪​​​​​
+/**=======================================================================================================================
+ **                                                     LoseLive
+ *
+ *?  decrease the live count 
+ *@use updateLives  
+ *@use draw  
+ *=======================================================================================================================**/
 function loseLive()
 {
-    if (lives > 0){
-        lives--;
-        updateLives(lives);
-        draw();
+    if (win == false)
+    {
+        if (lives > 0){
+            lives--;
+            updateLives(lives);
+            draw();
+        }
     }
 }
+
+/**=======================================================================================================================
+ **                                                     Draw
+ *
+ *?  draw each part of the hangman depending of the amout of life used
+ *=======================================================================================================================**/
 function draw()
 {
-    let errorNbr = 6-lives;
-    document.getElementById( drawing[ (errorNbr)-1 ] ).classList.add('active');
+    if (win == false)
+    {
+        let errorNbr = 6-lives;
+        document.getElementById( drawing[ (errorNbr)-1 ] ).classList.add('active');
+    }
 }
 
-// ajoute la lettre du mots dans l'affichage
-// 🇦​​​​​🇩​​​​​🇩​​​​​🇱​​​​​🇪​​​​​🇹​​​​​🇹​​​​​🇪​​​​​🇷​​​​​
+/**=======================================================================================================================
+ **                                                  AddLetter
+ *
+ *Add the input in the target field
+ *@param userInput 
+ *@use result
+ *=======================================================================================================================**/
 function addLetter(userInput)
 {
     // foreach letter, check the target with the same name and replace the showed word
@@ -132,8 +172,13 @@ String.prototype.replaceAt = function(index, replacement) {
     return this.substr(0, index) + replacement + this.substr(index + replacement.length);
 }
 
-// retire le pointer et met la lettre en rouge
-// 🇷​​​​​🇪​​​​​🇲​​​​​🇴​​​​​🇻​​​​​🇪​​​​​🇱​​​​​🇪​​​​​🇹​​​​​🇹​​​​​🇪​​​​​🇷
+/**=======================================================================================================================
+ **                                                     RemoveLetter
+ *
+ *?  adding class to make the button color red and unclickable
+ *@param userInput  
+ *@use result
+ *=======================================================================================================================**/
 function removeLetter(userInput)
 {
     alphabet.forEach(element => {
@@ -148,8 +193,11 @@ function removeLetter(userInput)
     result();
 }
 
-// 🇷​​​​​🇪​​​​​🇸​​​​​🇺​​​​​🇱​​​​​🇹​​​​​
-// vérifie si la personne à gagné
+/**=======================================================================================================================
+ **                                                     Result
+ *
+ *?  verify if the player win or lose depending of the word or the amount of live 
+ *=======================================================================================================================**/
 function result()
 {
     if (lives > 0)
@@ -160,11 +208,11 @@ function result()
             document.getElementById('userInfo').innerText = 'Congrats, you just won!';
             document.getElementById('userInfo').classList.add('win');
             win = true;
-
             document.getElementById('guess').disabled = true;
         }    
     }
-    else{
+    else
+    {
         document.getElementById('userInfo').innerText;
         // let message = 'You lose ! the word was '+randomWord;
         document.getElementById('userInfo').innerText = 'You lose !';
@@ -176,10 +224,14 @@ function result()
         win = true;
 
         document.getElementById('guess').disabled = true;
-    }
-    
+    }    
 }
 
+/**=======================================================================================================================
+ **                                                  🇧​​​​​uttons
+ *?  set all the eventListener
+ *@use init
+ *=======================================================================================================================**/
 // 🇧​​​​​🇺​​​​​🇹​​​​​🇹​​​​​🇴​​​​​🇳​​​​​🇸
 if (win != true)
 {
@@ -202,7 +254,6 @@ if (win != true)
     document.getElementById('reload').addEventListener('click', function(e)
     {
         init();
-        // console.log(randomWord);-------------------------------------------------------------------------------------------------------------------
     });
 }
 else
@@ -214,8 +265,9 @@ else
     });
 }
 
-// initialise le jeux et affiche le mots dans la console.
+/**=======================================================================================================================
+ **                                             Run the game at loading
+ *?  Call init function to stat a game
+ *@use init 
+ *=======================================================================================================================**/
 init();
-// console.log(randomWord); -------------------------------------------------------------------------------------------------------------------
-
-
