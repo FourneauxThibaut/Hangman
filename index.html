@@ -11,12 +11,49 @@
 </head>
 <body>
     <header>
-        <h1>Hangmans</h1>
+        <h1>Hangman</h1>
     </header>
     <main>
         <section class="hangmansImage">
-            <canvas class="image">
-            </canvas>
+            <section class="image">
+                <svg id="head" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 113 172.34">
+                    <defs>
+                        <style>.cls-1{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:15px;}</style>
+                    </defs>
+                    <rect class="cls-1" x="49.97" width="13.06" height="60"/>
+                    <circle class="cls-1" cx="56.5" cy="110" r="49"/>
+                </svg>
+                <svg id="body" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 154">
+                    <defs>
+                        <style>.cls-1{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:15px;}</style>
+                    </defs>
+                    <line class="cls-1" x1="7.5" y1="7.5" x2="7.5" y2="146.5"/>
+                </svg>
+                <svg id="lArm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 116.22 44.26">
+                    <defs>
+                        <style>.cls-1{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:15px;}</style>
+                    </defs>
+                    <line class="cls-1" x1="108.72" y1="7.5" x2="7.5" y2="36.76"/>
+                </svg>
+                <svg id="rArm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 116.22 44.26">
+                    <defs>
+                        <style>.cls-1{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:15px;}</style>
+                    </defs>
+                    <line class="cls-1" x1="7.5" y1="7.5" x2="108.72" y2="36.76"/>
+                </svg>
+                <svg id="lLegs" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 89.5 89.5">
+                    <defs>
+                        <style>.cls-1{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:15px;}</style>
+                    </defs>
+                    <line class="cls-1" x1="82" y1="7.5" x2="7.5" y2="82"/>
+                </svg>
+                <svg id="rLegs" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 89.5 89.5">
+                    <defs>
+                        <style>.cls-1{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:15px;}</style>
+                    </defs>
+                    <line class="cls-1" x1="7.5" y1="7.5" x2="82" y2="82"/>
+                </svg>
+            </section>
             <section class="word">
                 <p id="word"></p>
             </section>
@@ -51,7 +88,7 @@
                 <div id="letterZ">z</div>
             </section>
             <section class="hangmansInput">
-                <form action="#" method="post">
+                <div class="form">
                     <div class="field">
                         <input type="text" name="guess" id="guess" placeholder="Guess"/>
                     </div>
@@ -62,9 +99,12 @@
                             </svg>
                         </button>
                     </div>
-                </form>
+                </div>
                 <section class="info">
                     <p id="userInfo">You have 6 lives left.</p>
+                </section>
+                <section class="restart">
+                    <button id="reload">Restart</button>
                 </section>
             </section>
         </section>
