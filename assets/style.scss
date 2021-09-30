@@ -34,59 +34,44 @@ main{
             height: 50vh;
             width: 30%;
 
-            #head{
+            #head, #body, #lArm, #rArm, #lLegs, #rLegs{
                 position: absolute;
+                stroke-dasharray: 1000;
+                stroke-dashoffset: 1000;
+            }
+            #head, #body{
                 left: 50%;
                 transform: translateX(-50%);
+            }
+            #head{
                 top: -1.5vh;
                 height: 17vh;
-                stroke-dasharray: 1000;
-                stroke-dashoffset: 1000;
             }
             #body{
-                position: absolute;
-                left: 50%;
-                transform: translateX(-50%);
                 top: 14vh;
                 height: 35%;
-                stroke-dasharray: 1000;
-                stroke-dashoffset: 1000;
+            }
+            #lArm, #rArm{
+                top: 18vh;
+                left: 50%;
+                height: 5vh;
             }
             #lArm{
-                position: absolute;
-                top: 18vh;
-                left: 50%;
                 transform: translateX(-100%);
-                height: 5vh;
-                stroke-dasharray: 1000;
-                stroke-dashoffset: 1000;
             }
             #rArm{
-                position: absolute;
-                top: 18vh;
-                left: 50%;
                 transform: translateX(0);
-                height: 5vh;
-                stroke-dasharray: 1000;
-                stroke-dashoffset: 1000;
+            }
+            #lLegs, #rLegs{
+                top: 30.3vh;
+                left: 50%;
+                height: 9vh;
             }
             #lLegs{
-                position: absolute;
-                top: 30.3vh;
-                left: 50%;
                 transform: translateX(-100%);
-                height: 9vh;
-                stroke-dasharray: 1000;
-                stroke-dashoffset: 1000;
             }
             #rLegs{
-                position: absolute;
-                top: 30.3vh;
-                left: 50%;
                 transform: translateX(0);
-                height: 9vh;
-                stroke-dasharray: 1000;
-                stroke-dashoffset: 1000;
             }
             .active{
                 stroke-dashoffset: 0 !important;

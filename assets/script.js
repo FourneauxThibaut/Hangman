@@ -1,5 +1,6 @@
 let lives = 6;
 let win = false;
+let consecutiveFail = 0;
 let randomWord = ''
 const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 const drawing = ['head', 'body', 'lArm', 'rArm', 'lLegs', 'rLegs'];
@@ -17,6 +18,7 @@ function init()
     randomWord = words[Math.floor(Math.random()*words.length)].toLowerCase();
     lives = 6;
     win = false;
+    consecutiveFail = 0;
     updateLives(lives);
     // create the hidden world
     let temp = '_';
@@ -32,11 +34,10 @@ function init()
         document.getElementById('letter'+upper).classList.remove('disable');
     });
     document.getElementById('userInfo').classList.remove('lose');
+    document.getElementById('userInfo').classList.remove('win');
     drawing.forEach(element => {
         document.getElementById( element ).classList.remove('active');
     });
-    
-    document.getElementById('guess').disabled = false;
 
     return randomWord;
 }
@@ -53,42 +54,46 @@ function init()
 function guess(userInput){
     let temp = 0;
         // look if input is more then a letter
-        if (userInput.length > 1 )
+    if (userInput.length > 1 )
+    {
+        // look if the guess is correct
+        if (userInput == randomWord)
         {
-            // look if the guess is correct
-            if (userInput == randomWord)
+            for (let j=0; j<userInput.length; j++)
             {
-                for (let j=0; j<userInput.length; j++)
-                {
-                    addLetter(userInput[j]);
-                }
-            }
-            // look if it's uncorrect
-            else
-            {
-                loseLive();
-                result();
+                addLetter(userInput[j]);
             }
         }
-        // look if it's only one letter
-        else if (userInput.length == 1)
+        // look if it's uncorrect
+        else
         {
-            // look if the input are the same a one letter in the random word
-            for (let i=0; i<randomWord.length; i++)
+            loseLive();
+            result();
+        }
+    }
+    // look if it's only one letter
+    else if (userInput.length == 1)
+    {
+        // look if the input are the same a one letter in the random word
+        for (let i=0; i<randomWord.length; i++)
+        {
+            if (userInput == randomWord[i])
             {
-                if (userInput == randomWord[i])
-                {
-                    temp++;
-                    addLetter(userInput);
-                }
+                temp++;
+                addLetter(userInput);
             }
-            // if the guess doesnt correspond at least one letter
-            if (temp <= 0)
+        }
+        // if the guess doesnt correspond at least one letter
+        if (temp <= 0)
+        {
+            // look if the game is finish and if the button already was clicked
+            if (win != true && document.getElementById('letter'+(userInput.toUpperCase())).className == "") 
             {
                 loseLive();
                 removeLetter(userInput);
             }
-        } 
+        }
+    } 
 }
 
 /**=======================================================================================================================
@@ -118,8 +123,10 @@ function loseLive()
     {
         if (lives > 0){
             lives--;
+            consecutiveFail++;
             updateLives(lives);
             draw();
+            failStreak()
         }
     }
 }
@@ -166,6 +173,7 @@ function addLetter(userInput)
         }
     });
     // each time an letter is added, look if the player won
+    consecutiveFail = 0;
     result();
 }
 String.prototype.replaceAt = function(index, replacement) {
@@ -194,6 +202,34 @@ function removeLetter(userInput)
 }
 
 /**=======================================================================================================================
+ **                                                  failStreak
+ *
+ *?  What does it do?
+ *=======================================================================================================================**/
+function failStreak()
+{
+    if ( consecutiveFail == 4 )
+    {
+        let randomWordlength = randomWord.length;
+        let randomLetterNbr = Math.round(randomWordlength/3);
+        for (let i = 0; i < randomLetterNbr; i++)
+        {
+            randomLetter = randomWord[ Math.round( Math.random()*randomWordlength ) ]
+            verifOutput = document.getElementById('word').innerText
+
+            for (let j=0; j < randomWordlength; j++)
+            {
+                if (randomLetter == verifOutput[j])
+                {
+                    randomLetter = randomLetterNbr, randomWord[ Math.round( Math.random()*randomWordlength ) ];
+                }
+                addLetter(randomLetter);
+            }
+        }
+    }
+}
+
+/**=======================================================================================================================
  **                                                     Result
  *
  *?  verify if the player win or lose depending of the word or the amount of live 
@@ -208,7 +244,6 @@ function result()
             document.getElementById('userInfo').innerText = 'Congrats, you just won!';
             document.getElementById('userInfo').classList.add('win');
             win = true;
-            document.getElementById('guess').disabled = true;
         }    
     }
     else
@@ -222,8 +257,6 @@ function result()
         target.classList.add('red');
 
         win = true;
-
-        document.getElementById('guess').disabled = true;
     }    
 }
 
@@ -232,38 +265,118 @@ function result()
  *?  set all the eventListener
  *@use init
  *=======================================================================================================================**/
-// 🇧​​​​​🇺​​​​​🇹​​​​​🇹​​​​​🇴​​​​​🇳​​​​​🇸
-if (win != true)
-{
-    // crée un boutton pour chaque lettres.
-    alphabet.forEach(element => {
-        let upper = element.toUpperCase();
-        document.getElementById('letter'+upper).addEventListener('click', function(e)
-        {
-            guess(element);
-        })
-    });
-    // vérifie si l'utilisateur entre une input
-    document.getElementById('run').addEventListener('click', function(e)
+// crée un boutton pour chaque lettres.
+alphabet.forEach(element => {
+    let upper = element.toUpperCase();
+    document.getElementById('letter'+upper).addEventListener('click', function(e)
     {
-        let userInput = (document.getElementById('guess').value).toLowerCase();
-        guess(userInput);
-        document.getElementById('guess').value = '';
-    });
-    // vérifie si l'utilisateur reload
-    document.getElementById('reload').addEventListener('click', function(e)
-    {
-        init();
-    });
-}
-else
+        guess(element);
+    })
+});
+// vérifie si l'utilisateur reload
+document.getElementById('reload').addEventListener('click', function(e)
 {
-    document.getElementById('run').removeEventListener('click', arguments.callee);
-    alphabet.forEach(element => {
-        let upper = element.toUpperCase();
-        document.getElementById('letter'+upper).removeEventListener('click', arguments.callee);
-    });
-}
+    init();
+});
+
+/**=======================================================================================================================
+ **                                                  Keydown
+ *
+ *?  listen if user input with the keyborad
+ *=======================================================================================================================**/
+ window.addEventListener("keydown", function (event) {
+    if (event.defaultPrevented) {
+      return; // Do nothing if the event was already processed
+    }
+    switch (event.key) {
+        case "a":
+            guess(event.key)
+            break;
+        case "b":
+            guess(event.key)
+            break;
+        case "c":
+            guess(event.key)
+            break;
+        case "d":
+            guess(event.key)
+            break;
+        case "e":
+            guess(event.key)
+            break;
+        case "f":
+            guess(event.key)
+            break;
+        case "g":
+            guess(event.key)
+            break;
+        case "h":
+            guess(event.key)
+            break;
+        case "i":
+            guess(event.key)
+            break;
+        case "j":
+            guess(event.key)
+            break;
+        case "k":
+            guess(event.key)
+            break;
+        case "l":
+            guess(event.key)
+            break;
+        case "m":
+            guess(event.key)
+            break;
+        case "n":
+            guess(event.key)
+            break;
+        case "o":
+            guess(event.key)
+            break;
+        case "p":
+            guess(event.key)
+            break;
+        case "q":
+            guess(event.key)
+            break;
+        case "r":
+            guess(event.key)
+            break;
+        case "s":
+            guess(event.key)
+            break;
+        case "t":
+            guess(event.key)
+            break;
+        case "u":
+            guess(event.key)
+            break;
+        case "v":
+            guess(event.key)
+            break;
+        case "w":
+            guess(event.key)
+            break;
+        case "x":
+            guess(event.key)
+            break;
+        case "y":
+            guess(event.key)
+            break;
+        case "z":
+            guess(event.key)
+            break;
+        case "Enter":
+            init();
+            break;
+    }
+  
+    // Cancel the default action to avoid it being handled twice
+    event.preventDefault();
+  }, true);
+  // the last option dispatches the event to the listener first,
+  // then dispatches event to window
 
 /**=======================================================================================================================
  **                                             Run the game at loading
@@ -271,3 +384,5 @@ else
  *@use init 
  *=======================================================================================================================**/
 init();
+
+
