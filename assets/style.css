@@ -16,8 +16,8 @@ header {
   text-transform: uppercase;
   text-align: center;
   font-size: 2rem;
-  color: #fff;
-  background-color: black;
+  color: #ffffff;
+  background-color: #000000;
 }
 
 main {
@@ -27,91 +27,76 @@ main {
 }
 
 main .hangmansImage {
-  background-image: url(./storage/etrier.svg);
-  background-repeat: no-repeat;
-  background-position: center;
-  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  position: relative;
   height: 81vh;
   width: 40%;
+  background-image: url(./storage/etrier.svg);
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 main .hangmansImage .image {
   position: relative;
   margin: 11vh 0 0 37%;
-  height: 50vh;
-  width: 30%;
+}
+
+main .hangmansImage .image #head, main .hangmansImage .image #body, main .hangmansImage .image #lArm, main .hangmansImage .image #rArm, main .hangmansImage .image #lLegs, main .hangmansImage .image #rLegs {
+  position: absolute;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+}
+
+main .hangmansImage .image #head, main .hangmansImage .image #body {
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
 }
 
 main .hangmansImage .image #head {
-  position: absolute;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
   top: -1.5vh;
   height: 17vh;
-  stroke-dasharray: 1000;
-  stroke-dashoffset: 1000;
 }
 
 main .hangmansImage .image #body {
-  position: absolute;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
   top: 14vh;
-  height: 35%;
-  stroke-dasharray: 1000;
-  stroke-dashoffset: 1000;
+  height: 25.5%;
+}
+
+main .hangmansImage .image #lArm, main .hangmansImage .image #rArm {
+  top: 18vh;
+  left: 50%;
+  height: 5vh;
 }
 
 main .hangmansImage .image #lArm {
-  position: absolute;
-  top: 18vh;
-  left: 50%;
   -webkit-transform: translateX(-100%);
           transform: translateX(-100%);
-  height: 5vh;
-  stroke-dasharray: 1000;
-  stroke-dashoffset: 1000;
 }
 
 main .hangmansImage .image #rArm {
-  position: absolute;
-  top: 18vh;
-  left: 50%;
   -webkit-transform: translateX(0);
           transform: translateX(0);
-  height: 5vh;
-  stroke-dasharray: 1000;
-  stroke-dashoffset: 1000;
+}
+
+main .hangmansImage .image #lLegs, main .hangmansImage .image #rLegs {
+  top: 30.3vh;
+  height: 9vh;
 }
 
 main .hangmansImage .image #lLegs {
-  position: absolute;
-  top: 30.3vh;
-  left: 50%;
-  -webkit-transform: translateX(-100%);
-          transform: translateX(-100%);
-  height: 9vh;
-  stroke-dasharray: 1000;
-  stroke-dashoffset: 1000;
+  -webkit-transform: translateX(-95%);
+          transform: translateX(-95%);
 }
 
 main .hangmansImage .image #rLegs {
-  position: absolute;
-  top: 30.3vh;
-  left: 50%;
-  -webkit-transform: translateX(0);
-          transform: translateX(0);
-  height: 9vh;
-  stroke-dasharray: 1000;
-  stroke-dashoffset: 1000;
+  -webkit-transform: translateX(-5%);
+          transform: translateX(-5%);
 }
 
 main .hangmansImage .image .active {
@@ -127,16 +112,25 @@ main .hangmansImage .word {
   text-transform: uppercase;
   bottom: 5vh;
   left: 11.1vw;
-  letter-spacing: 1rem;
-  margin-right: -1rem;
+  letter-spacing: .7em;
+  margin-right: .7em;
   font-size: 1.7rem;
   font-weight: bold;
 }
 
-main .hangmansContent {
+main .hangmansContent, main .hangmansOutput {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+main .hangmansContent {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -145,19 +139,12 @@ main .hangmansContent {
 }
 
 main .hangmansContent .hangmansOutput {
-  padding: 2rem 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  padding: 16vh 0 7vh 0;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   font-size: 2rem;
   text-transform: uppercase;
   font-weight: bold;
-  width: 100%;
 }
 
 main .hangmansContent .hangmansOutput > * {
@@ -166,20 +153,17 @@ main .hangmansContent .hangmansOutput > * {
       -ms-flex: 0 5.5%;
           flex: 0 5.5%;
   text-align: center;
-  -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
-      align-self: center;
   cursor: pointer;
-  -webkit-transition-duration: 0.8s;
-          transition-duration: 0.8s;
+  -webkit-transition-duration: .8s;
+          transition-duration: .8s;
 }
 
 main .hangmansContent .hangmansOutput > *:hover {
-  color: white;
+  color: #ffffff;
   -webkit-text-stroke-width: 2px;
-  -webkit-text-stroke-color: black;
-  -webkit-transition-duration: 0.5s;
-          transition-duration: 0.5s;
+  -webkit-text-stroke-color: #000000;
+  -webkit-transition-duration: .5s;
+          transition-duration: .5s;
 }
 
 main .hangmansContent .hangmansInput {
@@ -187,57 +171,7 @@ main .hangmansContent .hangmansInput {
   width: 100%;
 }
 
-main .hangmansContent .hangmansInput .form {
-  margin-top: 8vh;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
-main .hangmansContent .hangmansInput .form input[type=text] {
-  font-size: 2rem;
-  border-bottom: 1px solid black;
-  border-top: none;
-  border-right: none;
-  border-left: none;
-  margin-left: 1rem;
-  width: 250px;
-  -webkit-transition-duration: 1.2s;
-          transition-duration: 1.2s;
-}
-
-main .hangmansContent .hangmansInput .form input[type=text]:focus {
-  outline: none;
-  padding: 0 1rem;
-  -webkit-transition-duration: 0.8s;
-          transition-duration: 0.8s;
-}
-
-main .hangmansContent .hangmansInput .form input[type=text]:disabled {
-  background: transparent;
-  cursor: not-allowed;
-}
-
-main .hangmansContent .hangmansInput .form button {
-  height: 2.1rem;
-  width: 2.1rem;
-  background-color: transparent;
-  border: none;
-  color: black;
-}
-
 main .hangmansContent .hangmansInput .info {
-  margin-top: 3rem;
   text-align: center;
   color: #838383;
 }
@@ -253,8 +187,9 @@ main .hangmansContent .hangmansInput .restart {
 }
 
 main .hangmansContent .hangmansInput .restart #reload {
-  color: white;
-  background-color: #2e2c2c;
+  color: #ffffff;
+  background-color: #000000;
+  opacity: .65;
   padding: 0.5rem 0.8rem;
   border: none;
   border-radius: 5px;
@@ -263,22 +198,21 @@ main .hangmansContent .hangmansInput .restart #reload {
 }
 
 main .hangmansContent .hangmansInput .restart #reload:hover {
-  background-color: black;
+  opacity: 1;
   -webkit-transition-duration: 0.5s;
           transition-duration: 0.5s;
 }
 
 footer {
-  height: 7vh;
   text-align: center;
-  background-color: black;
+  color: #ffffff;
+  background-color: #000000;
   font-size: 1.6rem;
   text-transform: uppercase;
 }
 
 footer a {
   line-height: 7vh;
-  color: #fff;
   -webkit-transition-duration: 0.8s;
           transition-duration: 0.8s;
 }
@@ -306,18 +240,246 @@ footer a:hover {
 }
 
 .disable:hover {
-  color: black !important;
+  color: #000000 !important;
   -webkit-text-stroke-width: 0px !important;
-  -webkit-text-stroke-color: black !important;
+  -webkit-text-stroke-color: #000000 !important;
 }
 
 .win {
-  color: #51c756;
+  color: #2dc277;
   font-size: 2rem;
 }
 
 .lose {
   color: #af2121;
   font-size: 2rem;
+}
+
+@media screen and (max-width: 1560px) {
+  main .hangmansImage .image #head {
+    top: 1vh;
+  }
+  main .hangmansImage .image #body {
+    top: 16vh;
+  }
+  main .hangmansImage .image #lArm, main .hangmansImage .image #rArm {
+    top: 20vh;
+  }
+  main .hangmansImage .image #lLegs, main .hangmansImage .image #rLegs {
+    top: 32.5vh;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  main .hangmansImage .image #head {
+    top: 3vh;
+  }
+  main .hangmansImage .image #body {
+    top: 18vh;
+  }
+  main .hangmansImage .image #lArm, main .hangmansImage .image #rArm {
+    top: 22vh;
+  }
+  main .hangmansImage .image #lLegs, main .hangmansImage .image #rLegs {
+    top: 34.5vh;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  main .hangmansImage .image #head {
+    top: 5vh;
+  }
+  main .hangmansImage .image #body {
+    top: 20vh;
+  }
+  main .hangmansImage .image #lArm, main .hangmansImage .image #rArm {
+    top: 24vh;
+  }
+  main .hangmansImage .image #lLegs, main .hangmansImage .image #rLegs {
+    top: 36.5vh;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  main {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  main .hangmansImage {
+    height: 45vh;
+    width: 100%;
+  }
+  main .hangmansImage .image #head, main .hangmansImage .image #body, main .hangmansImage .image #lArm, main .hangmansImage .image #rArm, main .hangmansImage .image #lLegs, main .hangmansImage .image #rLegs {
+    position: absolute;
+  }
+  main .hangmansImage .image #head {
+    -webkit-transform: translateX(-322.5%);
+            transform: translateX(-322.5%);
+    top: -6vh;
+    height: 9vh;
+  }
+  main .hangmansImage .image #body {
+    top: 2.5vh;
+    height: 25.5%;
+    -webkit-transform: translateX(-1950%);
+            transform: translateX(-1950%);
+  }
+  main .hangmansImage .image #lArm, main .hangmansImage .image #rArm {
+    top: 4.5vh;
+    right: 50%;
+    height: 3vh;
+  }
+  main .hangmansImage .image #lArm {
+    -webkit-transform: translateX(-300%);
+            transform: translateX(-300%);
+  }
+  main .hangmansImage .image #rArm {
+    -webkit-transform: translateX(-210%);
+            transform: translateX(-210%);
+  }
+  main .hangmansImage .image #lLegs, main .hangmansImage .image #rLegs {
+    top: 10.5vh;
+    height: 5vh;
+  }
+  main .hangmansImage .image #lLegs {
+    -webkit-transform: translateX(-415%);
+            transform: translateX(-415%);
+  }
+  main .hangmansImage .image #rLegs {
+    -webkit-transform: translateX(-325%);
+            transform: translateX(-325%);
+  }
+  main .hangmansImage .word {
+    width: 50%;
+    text-align: start;
+    text-transform: uppercase;
+    bottom: 2vh;
+    left: 43vw;
+  }
+  main .hangmansContent {
+    width: 100%;
+    margin: 0 auto;
+  }
+  main .hangmansContent .hangmansOutput {
+    padding: 2vh 0;
+    font-size: 1.4rem;
+  }
+  main .hangmansInput {
+    height: 19.2vh !important;
+  }
+  main .hangmansInput .restart {
+    margin: 1.5rem 0 !important;
+  }
+}
+
+@media screen and (max-width: 925px) {
+  main .hangmansImage {
+    height: 40vh;
+    width: 100%;
+  }
+  main .hangmansImage .image #head {
+    -webkit-transform: translateX(-220%);
+            transform: translateX(-220%);
+  }
+  main .hangmansImage .image #body {
+    top: 2.5vh;
+    height: 30%;
+    -webkit-transform: translateX(-1230%);
+            transform: translateX(-1230%);
+  }
+  main .hangmansImage .image #lArm {
+    -webkit-transform: translateX(-225%);
+            transform: translateX(-225%);
+  }
+  main .hangmansImage .image #rArm {
+    -webkit-transform: translateX(-130%);
+            transform: translateX(-130%);
+  }
+  main .hangmansImage .image #lLegs {
+    -webkit-transform: translateX(-295%);
+            transform: translateX(-295%);
+  }
+  main .hangmansImage .image #rLegs {
+    -webkit-transform: translateX(-210%);
+            transform: translateX(-210%);
+  }
+  main .hangmansImage .word {
+    bottom: -1.5vh;
+  }
+  main .hangmansContent .hangmansOutput {
+    padding: 1vh 0;
+    font-size: 1.4rem;
+  }
+  main .hangmansInput {
+    height: 19.8vh !important;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  main .hangmansImage .image #head {
+    -webkit-transform: translateX(-150%);
+            transform: translateX(-150%);
+  }
+  main .hangmansImage .image #body {
+    -webkit-transform: translateX(-750%);
+            transform: translateX(-750%);
+  }
+  main .hangmansImage .image #lArm {
+    -webkit-transform: translateX(-170%);
+            transform: translateX(-170%);
+  }
+  main .hangmansImage .image #rArm {
+    -webkit-transform: translateX(-80%);
+            transform: translateX(-80%);
+  }
+  main .hangmansImage .image #lLegs {
+    -webkit-transform: translateX(-215%);
+            transform: translateX(-215%);
+  }
+  main .hangmansImage .image #rLegs {
+    -webkit-transform: translateX(-125%);
+            transform: translateX(-125%);
+  }
+  main .hangmansImage .word {
+    letter-spacing: .6em;
+    margin-right: .6em;
+    font-size: 1.55rem;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  main .hangmansImage .image #head {
+    -webkit-transform: translateX(-60%);
+            transform: translateX(-60%);
+  }
+  main .hangmansImage .image #body {
+    -webkit-transform: translateX(-110%);
+            transform: translateX(-110%);
+  }
+  main .hangmansImage .image #lArm {
+    -webkit-transform: translateX(-105%);
+            transform: translateX(-105%);
+  }
+  main .hangmansImage .image #rArm {
+    -webkit-transform: translateX(-10%);
+            transform: translateX(-10%);
+  }
+  main .hangmansImage .image #lLegs {
+    -webkit-transform: translateX(-105%);
+            transform: translateX(-105%);
+  }
+  main .hangmansImage .image #rLegs {
+    -webkit-transform: translateX(-15%);
+            transform: translateX(-15%);
+  }
+  main .hangmansImage .word {
+    bottom: 0vh;
+    left: 25vw !important;
+    letter-spacing: .45em;
+    margin-right: .45em;
+    font-size: 1.15rem;
+  }
 }
 /*# sourceMappingURL=style.css.map */

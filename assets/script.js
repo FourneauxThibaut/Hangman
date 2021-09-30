@@ -102,8 +102,6 @@ function guess(userInput){
  *?  update the number of tries in the p field selected as "userInfo"
  *@param left
  *=======================================================================================================================**/
-// mets à jour l'affichage des vies.
-// 🇺​​​​​🇵​​​​​🇩​​​​​🇦​​​​​🇹​​​​​🇪​​​​​🇱​​​​​🇮​​​​​🇻​​​​​🇪​​​​​🇸
 function updateLives(left)
 {
     let userInfo = document.getElementById('userInfo');
@@ -384,5 +382,3 @@ document.getElementById('reload').addEventListener('click', function(e)
  *@use init 
  *=======================================================================================================================**/
 init();
-
-
