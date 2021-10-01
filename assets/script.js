@@ -20,13 +20,17 @@ function init()
     lives = 6;
     win = false;
     consecutiveFail = 0;
+    // create the hidden word
     let temp = '_';
+    for (let i=1; i<randomWord.length; i++){
+        temp += '_';
+    }
+    document.getElementById('word').innerHTML = temp;
     // target reset
     target.classList.add('disableLink');
     target.classList.remove('red');
     target.classList.remove('winning');
-    target.style.cursor = "default"; 
-    target.outerHTML = "<p id=\"word\"></p>";
+    target.innerHTML = temp;
     // keyboard button reset
     alphabet.forEach(element => {
         let upper = element.toUpperCase();
@@ -41,14 +45,6 @@ function init()
         document.getElementById( element ).classList.remove('active');
     });
     // update number of tries avalaible on vue
-    // create the hidden world
-    for (let i=1; i<randomWord.length; i++){
-        temp += '_';
-    }
-    console.log(target);
-    console.log(temp);
-    document.getElementById('word').innerHTML = temp;
-    target.innerHTML = temp;
     updateLives(lives);
     // return the hidden word as variable
     return randomWord;
@@ -263,8 +259,9 @@ function result()
             target.classList.add('winning');
             target.classList.remove('disableLink');
             target.style.cursor = "pointer";     
-            target.outerHTML = "<a href=\"\" id=\"word\" target=\"_blank\" rel=\"preconnect\" rel=\"noopener\"></a>";
-            target.href=link;
+            target.innerHTML = "<a href=\"\" id=\"inner-word\" target=\"_blank\" rel=\"preconnect\" rel=\"noopener\"></a>";
+            document.getElementById('inner-word').textContent = randomWord;
+            document.getElementById('inner-word').href=link;
         }    
     }
     else
@@ -279,9 +276,10 @@ function result()
 
         win = true;
         target.classList.remove('disableLink');
-        target.style.cursor = "pointer"; 
-        target.outerHTML = "<a href=\"\" id=\"word\" target=\"_blank\" rel=\"preconnect\" rel=\"noopener\"></a>";
-        target.href=link;
+        target.style.cursor = "pointer";     
+        target.innerHTML = "<a href=\"\" id=\"inner-word\" target=\"_blank\" rel=\"preconnect\" rel=\"noopener\"></a>";
+        document.getElementById('inner-word').textContent = randomWord;
+        document.getElementById('inner-word').href=link;
     }    
 }
 
@@ -328,6 +326,7 @@ document.getElementById('reload').addEventListener('click', init);
  *@use init 
  *=======================================================================================================================**/
 init();
+
 // Dont forget to take a look about:
 // Schema.org balisage
 // Robots.txt  
