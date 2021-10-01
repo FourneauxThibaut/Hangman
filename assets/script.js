@@ -1,10 +1,10 @@
-let randomWord = ''
+const target = document.getElementById('word');
+let randomWord = "";
+const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+const drawing = ['head', 'body', 'lArm', 'rArm', 'lLegs', 'rLegs'];
 let lives = 6;
 let win = false;
 let consecutiveFail = 0;
-const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-const drawing = ['head', 'body', 'lArm', 'rArm', 'lLegs', 'rLegs'];
-const target = document.getElementById('word');
 
 /**=======================================================================================================================
  **                                                     Init
@@ -16,22 +16,17 @@ function init()
 {
     // take a random animal from wordList.js
     randomWord = words[Math.floor(Math.random()*words.length)].toLowerCase();
-    // create the hidden world
-    let temp = '_';
-    for (let i=1; i<randomWord.length; i++){
-        temp += '_';
-    }
     // set variables
     lives = 6;
     win = false;
     consecutiveFail = 0;
+    let temp = '_';
     // target reset
     target.classList.add('disableLink');
     target.classList.remove('red');
     target.classList.remove('winning');
     target.style.cursor = "default"; 
-    target.href="";
-    target.innerHTML = temp;
+    target.outerHTML = "<p id=\"word\"></p>";
     // keyboard button reset
     alphabet.forEach(element => {
         let upper = element.toUpperCase();
@@ -46,6 +41,14 @@ function init()
         document.getElementById( element ).classList.remove('active');
     });
     // update number of tries avalaible on vue
+    // create the hidden world
+    for (let i=1; i<randomWord.length; i++){
+        temp += '_';
+    }
+    console.log(target);
+    console.log(temp);
+    document.getElementById('word').innerHTML = temp;
+    target.innerHTML = temp;
     updateLives(lives);
     // return the hidden word as variable
     return randomWord;
@@ -259,7 +262,8 @@ function result()
 
             target.classList.add('winning');
             target.classList.remove('disableLink');
-            target.style.cursor = "pointer"; 
+            target.style.cursor = "pointer";     
+            target.outerHTML = "<a href=\"\" id=\"word\" target=\"_blank\" rel=\"preconnect\" rel=\"noopener\"></a>";
             target.href=link;
         }    
     }
@@ -276,6 +280,7 @@ function result()
         win = true;
         target.classList.remove('disableLink');
         target.style.cursor = "pointer"; 
+        target.outerHTML = "<a href=\"\" id=\"word\" target=\"_blank\" rel=\"preconnect\" rel=\"noopener\"></a>";
         target.href=link;
     }    
 }
@@ -301,6 +306,7 @@ document.getElementById('reload').addEventListener('click', init);
  *
  *?  listen if user input with the keyborad
  *=======================================================================================================================**/
+//  for all letter, 
  window.addEventListener("keydown", function (event) {
     alphabet.forEach(element => {
         switch (event.key) {
@@ -309,6 +315,11 @@ document.getElementById('reload').addEventListener('click', init);
                 break;
         }
     });
+    switch (event.key) {
+        case "Space":
+        init();
+            break;
+    }
   }, true);
 
 /**=======================================================================================================================
@@ -317,3 +328,8 @@ document.getElementById('reload').addEventListener('click', init);
  *@use init 
  *=======================================================================================================================**/
 init();
+// Dont forget to take a look about:
+// Schema.org balisage
+// Robots.txt  
+// Sitemaps XML
+// canonical meta tag

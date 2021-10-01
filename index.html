@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Hangman created during becode exercices as solo project after javascript training">
+    <meta name="theme-color" content="#ff5e00">
     <!-- meta social tag -->
     <meta property="og:locale" content="en_US">
     <meta property="og:type" content="article">
@@ -13,7 +14,9 @@
     <meta property="og:description" content="lets play hangerman about animal">
     <meta property="og:url" content="https://fourneauxthibaut.github.io/Hangman/">
     <meta property="og:site_name" content="fourneauxthibaut.github.io">
-    <meta property="og:image" content="./assets/storage/etrier.svg"/>
+    <meta property="og:image" content="https://motsbleus.pages-informatique.com/motimg/jeudupendufb.jpg"/>
+    <!-- apple-touch-icon -->
+    <link rel="apple-touch-icon" href="https://motsbleus.pages-informatique.com/motimg/jeudupendufb.jpg">
     <!-- links -->
     <link rel="stylesheet" href="./assets/reset.css">
     <link rel="stylesheet" href="./assets/style.css">
@@ -67,7 +70,7 @@
                 </svg>
             </figure>
             <div class="word" itemprop="encoding">
-                <a href="" id="word" class="u-url" target="_blank" rel="noopener"></a>
+                <p id="word">hidden word</p>
             </div>
         </section>
         <section class="hangmansContent" itemprop="accessibilityControl">
@@ -111,9 +114,9 @@
         </section>
     </main>
     <footer>
-        <a class="h-card" href="https://github.com/FourneauxThibaut" itemprop="author">Fourneaux Thibaut</a>
+        <a class="h-card" href="https://github.com/FourneauxThibaut" rel=preconnect itemprop="author">Fourneaux Thibaut</a>
     </footer>
-    <script src="./assets/wordList.js"></script>
-    <script src="./assets/script.js"></script>
+    <script src="./assets/wordList.js" defer></script>
+    <script src="./assets/script.js" defer></script>
 </body>
 </html>
