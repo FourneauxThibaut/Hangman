@@ -110,12 +110,34 @@ main .hangmansImage .word {
   text-align: center;
   position: absolute;
   text-transform: uppercase;
+  cursor: default;
   bottom: 5vh;
   left: 11.1vw;
+  padding-left: 15px 17px;
   letter-spacing: .7em;
   margin-right: .7em;
   font-size: 1.7rem;
   font-weight: bold;
+}
+
+main .hangmansImage .winning:hover:hover {
+  color: #ffffff;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: #000000;
+  -webkit-transition-duration: .5s;
+          transition-duration: .5s;
+}
+
+main .hangmansImage .red {
+  color: #af2121;
+}
+
+main .hangmansImage .red:hover {
+  color: #ffffff;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: #af2121;
+  -webkit-transition-duration: .5s;
+          transition-duration: .5s;
 }
 
 main .hangmansContent, main .hangmansOutput {
@@ -147,6 +169,17 @@ main .hangmansContent .hangmansOutput {
   font-weight: bold;
 }
 
+main .hangmansContent .hangmansOutput .red {
+  color: #af2121 !important;
+  cursor: default !important;
+}
+
+main .hangmansContent .hangmansOutput .red:hover {
+  color: #af2121 !important;
+  -webkit-text-stroke-width: 0px !important;
+  -webkit-text-stroke-color: #af2121 !important;
+}
+
 main .hangmansContent .hangmansOutput > * {
   padding: 0.5rem;
   -webkit-box-flex: 0;
@@ -173,7 +206,12 @@ main .hangmansContent .hangmansInput {
 
 main .hangmansContent .hangmansInput .info {
   text-align: center;
-  color: #838383;
+  color: #575757;
+}
+
+main .hangmansContent .hangmansInput .win {
+  color: #2dc277;
+  font-size: 2rem;
 }
 
 main .hangmansContent .hangmansInput .restart {
@@ -188,8 +226,7 @@ main .hangmansContent .hangmansInput .restart {
 
 main .hangmansContent .hangmansInput .restart #reload {
   color: #ffffff;
-  background-color: #000000;
-  opacity: .65;
+  background-color: #575757;
   padding: 0.5rem 0.8rem;
   border: none;
   border-radius: 5px;
@@ -198,7 +235,7 @@ main .hangmansContent .hangmansInput .restart #reload {
 }
 
 main .hangmansContent .hangmansInput .restart #reload:hover {
-  opacity: 1;
+  background-color: #000000;
   -webkit-transition-duration: 0.5s;
           transition-duration: 0.5s;
 }
@@ -223,17 +260,6 @@ footer a:hover {
           transition-duration: 0.5s;
 }
 
-.red {
-  color: #af2121 !important;
-  cursor: default !important;
-}
-
-.red:hover {
-  color: #af2121 !important;
-  -webkit-text-stroke-width: 0px !important;
-  -webkit-text-stroke-color: #af2121 !important;
-}
-
 .disable {
   opacity: 0.45 !important;
   cursor: default !important;
@@ -245,58 +271,88 @@ footer a:hover {
   -webkit-text-stroke-color: #000000 !important;
 }
 
-.win {
-  color: #2dc277;
-  font-size: 2rem;
-}
-
 .lose {
   color: #af2121;
   font-size: 2rem;
 }
 
-@media screen and (max-width: 1560px) {
+.disableLink {
+  pointer-events: none !important;
+  cursor: pointer !important;
+}
+
+@media screen and (max-width: 1700px) {
   main .hangmansImage .image #head {
-    top: 1vh;
+    top: 1.5vh;
   }
   main .hangmansImage .image #body {
-    top: 16vh;
+    top: 17vh;
   }
   main .hangmansImage .image #lArm, main .hangmansImage .image #rArm {
-    top: 20vh;
+    top: 21vh;
   }
   main .hangmansImage .image #lLegs, main .hangmansImage .image #rLegs {
-    top: 32.5vh;
+    top: 34vh;
+  }
+}
+
+@media screen and (max-width: 1560px) {
+  main .hangmansImage .image #head {
+    top: 4vh;
+  }
+  main .hangmansImage .image #body {
+    top: 19vh;
+  }
+  main .hangmansImage .image #lArm, main .hangmansImage .image #rArm {
+    top: 23vh;
+  }
+  main .hangmansImage .image #lLegs, main .hangmansImage .image #rLegs {
+    top: 35.5vh;
+  }
+}
+
+@media screen and (max-width: 1490px) {
+  main .hangmansImage .image #head {
+    top: 4vh;
+  }
+  main .hangmansImage .image #body {
+    top: 19.5vh;
+  }
+  main .hangmansImage .image #lArm, main .hangmansImage .image #rArm {
+    top: 23vh;
+  }
+  main .hangmansImage .image #lLegs, main .hangmansImage .image #rLegs {
+    top: 36vh;
   }
 }
 
 @media screen and (max-width: 1400px) {
   main .hangmansImage .image #head {
-    top: 3vh;
+    top: 6vh;
   }
   main .hangmansImage .image #body {
-    top: 18vh;
+    top: 21.5vh;
   }
   main .hangmansImage .image #lArm, main .hangmansImage .image #rArm {
-    top: 22vh;
+    top: 25vh;
   }
   main .hangmansImage .image #lLegs, main .hangmansImage .image #rLegs {
-    top: 34.5vh;
+    top: 38vh;
   }
 }
 
 @media screen and (max-width: 1300px) {
   main .hangmansImage .image #head {
-    top: 5vh;
+    top: 7vh;
   }
   main .hangmansImage .image #body {
-    top: 20vh;
+    top: 22vh;
   }
   main .hangmansImage .image #lArm, main .hangmansImage .image #rArm {
-    top: 24vh;
+    top: 26vh;
   }
   main .hangmansImage .image #lLegs, main .hangmansImage .image #rLegs {
-    top: 36.5vh;
+    top: 39vh;
   }
 }
 

@@ -20,6 +20,9 @@ function init()
     win = false;
     consecutiveFail = 0;
     updateLives(lives);
+    target.classList.add('disableLink');
+    target.style.cursor = "default"; 
+    target.href="";
     // create the hidden world
     let temp = '_';
     for (let i=1; i<randomWord.length; i++){
@@ -27,6 +30,7 @@ function init()
     }
     target.innerHTML = temp;
     target.classList.remove('red');
+    target.classList.remove('winning');
     // remove all classes
     alphabet.forEach(element => {
         let upper = element.toUpperCase();
@@ -234,6 +238,8 @@ function failStreak()
  *=======================================================================================================================**/
 function result()
 {
+    
+    let link = "https://www.google.com/search?q="+randomWord+"&source=lnms&tbm=isch&sa=";
     if (lives > 0)
     {
         if (target.innerText.toLowerCase() == randomWord)
@@ -242,6 +248,11 @@ function result()
             document.getElementById('userInfo').innerText = 'Congrats, you just won!';
             document.getElementById('userInfo').classList.add('win');
             win = true;
+
+            target.classList.add('winning');
+            target.classList.remove('disableLink');
+            target.style.cursor = "pointer"; 
+            target.href=link;
         }    
     }
     else
@@ -255,6 +266,9 @@ function result()
         target.classList.add('red');
 
         win = true;
+        target.classList.remove('disableLink');
+        target.style.cursor = "pointer"; 
+        target.href=link;
     }    
 }
 

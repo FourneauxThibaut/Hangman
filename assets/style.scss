@@ -3,7 +3,7 @@ $color-red: #af2121;
 $color-orange: #ff5e00;
 $color-green: #2dc277;
 $black: #000000;
-$gray: #838383;
+$gray: #575757;
 $white: #ffffff;
 
 *{
@@ -86,12 +86,34 @@ main{
             text-align: center;
             position: absolute;
             text-transform: uppercase;
+            cursor: default;
             bottom: 5vh;
             left: 11.1vw;
+            padding-left: 15px 17px;
             letter-spacing: .7em;
             margin-right: .7em;
             font-size: 1.7rem;
             font-weight: bold;
+        }
+        .winning{
+            &:hover{
+                &:hover{
+                    color: $white;
+                    -webkit-text-stroke-width: 2px;
+                    -webkit-text-stroke-color: $black;
+                    transition-duration: .5s;
+                }
+            }
+        }
+        .red{
+            color: $color-red;
+        
+            &:hover{
+                color: $white;
+                -webkit-text-stroke-width: 2px;
+                -webkit-text-stroke-color: $color-red;
+                transition-duration: .5s;
+            }
         }
     }
 
@@ -111,6 +133,17 @@ main{
             font-size: 2rem;
             text-transform: uppercase;
             font-weight: bold;
+
+            .red{
+                color: $color-red !important;
+                cursor: default !important;
+            
+                &:hover{
+                    color:  $color-red !important;
+                    -webkit-text-stroke-width: 0px !important;
+                    -webkit-text-stroke-color:  $color-red !important;
+                }
+            }
 
             &>*{
                 padding: 0.5rem;
@@ -136,6 +169,11 @@ main{
                 text-align: center;
                 color: $gray;
             }
+
+            .win{
+                color: $color-green;
+                font-size: 2rem;
+            }
         
             .restart{
                 margin-top: 2rem;
@@ -144,15 +182,14 @@ main{
 
                 #reload{
                     color: $white;
-                    background-color: $black;
-                    opacity: .65;
+                    background-color: $gray;
                     padding: 0.5rem 0.8rem;
                     border: none;
                     border-radius: 5px;
                     transition-duration: 0.8s;
 
                     &:hover{
-                        opacity: 1;
+                        background-color: $black;
                         transition-duration: 0.5s;
                     }
                 }
@@ -177,16 +214,6 @@ footer{
         }
     }
 }
-.red{
-    color: $color-red !important;
-    cursor: default !important;
-
-    &:hover{
-        color:  $color-red !important;
-        -webkit-text-stroke-width: 0px !important;
-        -webkit-text-stroke-color:  $color-red !important;
-    }
-}
 .disable{
     opacity: 0.45 !important;
     cursor: default !important;
@@ -197,29 +224,69 @@ footer{
         -webkit-text-stroke-color:  $black !important;
     }
 }
-.win{
-    color: $color-green;
-    font-size: 2rem;
-}
 .lose{
     color: $color-red;
     font-size: 2rem;
+}
+.disableLink{
+    pointer-events: none !important;
+    cursor: pointer !important;
+}
+@media screen and (max-width: 1700px) {
+    main{
+        .hangmansImage{
+            .image{
+                #head{
+                    top: 1.5vh;
+                }
+                #body{
+                    top: 17vh;
+                }
+                #lArm, #rArm{
+                    top: 21vh;
+                }
+                #lLegs, #rLegs{
+                    top: 34vh;
+                }
+            }
+        }
+    }
 }
 @media screen and (max-width: 1560px) {
     main{
         .hangmansImage{
             .image{
                 #head{
-                    top: 1vh;
+                    top: 4vh;
                 }
                 #body{
-                    top: 16vh;
+                    top: 19vh;
                 }
                 #lArm, #rArm{
-                    top: 20vh;
+                    top: 23vh;
                 }
                 #lLegs, #rLegs{
-                    top: 32.5vh;
+                    top: 35.5vh;
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 1490px) {
+    main{
+        .hangmansImage{
+            .image{
+                #head{
+                    top: 4vh;
+                }
+                #body{
+                    top: 19.5vh;
+                }
+                #lArm, #rArm{
+                    top: 23vh;
+                }
+                #lLegs, #rLegs{
+                    top: 36vh;
                 }
             }
         }
@@ -230,16 +297,16 @@ footer{
         .hangmansImage{
             .image{
                 #head{
-                    top: 3vh;
+                    top: 6vh;
                 }
                 #body{
-                    top: 18vh;
+                    top: 21.5vh;
                 }
                 #lArm, #rArm{
-                    top: 22vh;
+                    top: 25vh;
                 }
                 #lLegs, #rLegs{
-                    top: 34.5vh;
+                    top: 38vh;
                 }
             }
         }
@@ -250,16 +317,16 @@ footer{
         .hangmansImage{
             .image{
                 #head{
-                    top: 5vh;
+                    top: 7vh;
                 }
                 #body{
-                    top: 20vh;
+                    top: 22vh;
                 }
                 #lArm, #rArm{
-                    top: 24vh;
+                    top: 26vh;
                 }
                 #lLegs, #rLegs{
-                    top: 36.5vh;
+                    top: 39vh;
                 }
             }
         }
