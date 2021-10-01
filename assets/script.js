@@ -1,7 +1,7 @@
+let randomWord = ''
 let lives = 6;
 let win = false;
 let consecutiveFail = 0;
-let randomWord = ''
 const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 const drawing = ['head', 'body', 'lArm', 'rArm', 'lLegs', 'rLegs'];
 const target = document.getElementById('word');
@@ -9,40 +9,45 @@ const target = document.getElementById('word');
 /**=======================================================================================================================
  **                                                     Init
  *
- *?  Reset all variables and class added during last game
+ *?  Create and reset all variables and class added during last game
  *@return randomWord
  *=======================================================================================================================**/                                
 function init()
 {
     // take a random animal from wordList.js
     randomWord = words[Math.floor(Math.random()*words.length)].toLowerCase();
-    lives = 6;
-    win = false;
-    consecutiveFail = 0;
-    updateLives(lives);
-    target.classList.add('disableLink');
-    target.style.cursor = "default"; 
-    target.href="";
     // create the hidden world
     let temp = '_';
     for (let i=1; i<randomWord.length; i++){
         temp += '_';
     }
-    target.innerHTML = temp;
+    // set variables
+    lives = 6;
+    win = false;
+    consecutiveFail = 0;
+    // target reset
+    target.classList.add('disableLink');
     target.classList.remove('red');
     target.classList.remove('winning');
-    // remove all classes
+    target.style.cursor = "default"; 
+    target.href="";
+    target.innerHTML = temp;
+    // keyboard button reset
     alphabet.forEach(element => {
         let upper = element.toUpperCase();
         document.getElementById('letter'+upper).classList.remove('red');
         document.getElementById('letter'+upper).classList.remove('disable');
     });
+    // userInfo reset
     document.getElementById('userInfo').classList.remove('lose');
     document.getElementById('userInfo').classList.remove('win');
+    // drawing reset
     drawing.forEach(element => {
         document.getElementById( element ).classList.remove('active');
     });
-
+    // update number of tries avalaible on vue
+    updateLives(lives);
+    // return the hidden word as variable
     return randomWord;
 }
 
@@ -56,11 +61,12 @@ function init()
  *@use removeLetter
  *=======================================================================================================================**/
 function guess(userInput){
+    // temp look how many time the input matches the hidden word
     let temp = 0;
-        // look if input is more then a letter
+    // look if input is more then a letter
     if (userInput.length > 1 )
     {
-        // look if the guess is correct
+        // look if the input matches the hidden word
         if (userInput == randomWord)
         {
             for (let j=0; j<userInput.length; j++)
@@ -68,19 +74,19 @@ function guess(userInput){
                 addLetter(userInput[j]);
             }
         }
-        // look if it's uncorrect
+        // if not make the player lose a live
         else
         {
             loseLive();
-            result();
         }
     }
     // look if it's only one letter
     else if (userInput.length == 1)
     {
-        // look if the input are the same a one letter in the random word
+        // look if the input matches at least one letter of the hidden word
         for (let i=0; i<randomWord.length; i++)
         {
+            // if yes, add one the the temp counter and add all letter coresponding in the vue
             if (userInput == randomWord[i])
             {
                 temp++;
@@ -90,7 +96,7 @@ function guess(userInput){
         // if the guess doesnt correspond at least one letter
         if (temp <= 0)
         {
-            // look if the game is finish and if the button already was clicked
+            // look if the game is finish and if the button already was clicked (to let the user click only one time on the same letter)
             if (win != true && document.getElementById('letter'+(userInput.toUpperCase())).className == "") 
             {
                 loseLive();
@@ -108,6 +114,7 @@ function guess(userInput){
  *=======================================================================================================================**/
 function updateLives(left)
 {
+    // show how many tries the user have on the vue
     let userInfo = document.getElementById('userInfo');
     userInfo.textContent = 'you have '+left+' lives left.';
 }
@@ -118,18 +125,20 @@ function updateLives(left)
  *?  decrease the live count 
  *@use updateLives  
  *@use draw  
+ *@use failStreak  
+ *@use result  
  *=======================================================================================================================**/
 function loseLive()
 {
-    if (win == false)
+    // look if the user can still play
+    if (win == false && lives > 0)
     {
-        if (lives > 0){
-            lives--;
-            consecutiveFail++;
-            updateLives(lives);
-            draw();
-            failStreak()
-        }
+        lives--;
+        consecutiveFail++;
+        updateLives(lives);
+        draw();
+        failStreak();
+        result();
     }
 }
 
@@ -140,6 +149,7 @@ function loseLive()
  *=======================================================================================================================**/
 function draw()
 {
+    // while the game isn't finish
     if (win == false)
     {
         let errorNbr = 6-lives;
@@ -166,7 +176,7 @@ function addLetter(userInput)
             target.textContent = tempArr.join('');
         }
     }
-    // make the text locked in the button list when clicking on the good one
+    // update the vue of the letter button clicked
     alphabet.forEach(element => {
         let upper = element.toUpperCase();
         if (userInput == element && win != true) 
@@ -174,12 +184,10 @@ function addLetter(userInput)
             document.getElementById('letter'+upper).classList.add('disable');
         }
     });
-    // each time an letter is added, look if the player won
+    // reset the pity count
     consecutiveFail = 0;
+    // look if the user won
     result();
-}
-String.prototype.replaceAt = function(index, replacement) {
-    return this.substr(0, index) + replacement + this.substr(index + replacement.length);
 }
 
 /**=======================================================================================================================
@@ -210,7 +218,7 @@ function removeLetter(userInput)
  *=======================================================================================================================**/
 function failStreak()
 {
-    if ( consecutiveFail == 4 )
+    if ( consecutiveFail == 3 )
     {
         let randomWordlength = randomWord.length;
         let randomLetterNbr = Math.round(randomWordlength/3);
@@ -286,10 +294,7 @@ alphabet.forEach(element => {
     })
 });
 // vérifie si l'utilisateur reload
-document.getElementById('reload').addEventListener('click', function(e)
-{
-    init();
-});
+document.getElementById('reload').addEventListener('click', init);
 
 /**=======================================================================================================================
  **                                                  Keydown
@@ -297,98 +302,14 @@ document.getElementById('reload').addEventListener('click', function(e)
  *?  listen if user input with the keyborad
  *=======================================================================================================================**/
  window.addEventListener("keydown", function (event) {
-    if (event.defaultPrevented) {
-      return; // Do nothing if the event was already processed
-    }
-    switch (event.key) {
-        case "a":
-            guess(event.key)
-            break;
-        case "b":
-            guess(event.key)
-            break;
-        case "c":
-            guess(event.key)
-            break;
-        case "d":
-            guess(event.key)
-            break;
-        case "e":
-            guess(event.key)
-            break;
-        case "f":
-            guess(event.key)
-            break;
-        case "g":
-            guess(event.key)
-            break;
-        case "h":
-            guess(event.key)
-            break;
-        case "i":
-            guess(event.key)
-            break;
-        case "j":
-            guess(event.key)
-            break;
-        case "k":
-            guess(event.key)
-            break;
-        case "l":
-            guess(event.key)
-            break;
-        case "m":
-            guess(event.key)
-            break;
-        case "n":
-            guess(event.key)
-            break;
-        case "o":
-            guess(event.key)
-            break;
-        case "p":
-            guess(event.key)
-            break;
-        case "q":
-            guess(event.key)
-            break;
-        case "r":
-            guess(event.key)
-            break;
-        case "s":
-            guess(event.key)
-            break;
-        case "t":
-            guess(event.key)
-            break;
-        case "u":
-            guess(event.key)
-            break;
-        case "v":
-            guess(event.key)
-            break;
-        case "w":
-            guess(event.key)
-            break;
-        case "x":
-            guess(event.key)
-            break;
-        case "y":
-            guess(event.key)
-            break;
-        case "z":
-            guess(event.key)
-            break;
-        case "Enter":
-            init();
-            break;
-    }
-  
-    // Cancel the default action to avoid it being handled twice
-    event.preventDefault();
+    alphabet.forEach(element => {
+        switch (event.key) {
+            case element:
+                guess(event.key);
+                break;
+        }
+    });
   }, true);
-  // the last option dispatches the event to the listener first,
-  // then dispatches event to window
 
 /**=======================================================================================================================
  **                                             Run the game at loading

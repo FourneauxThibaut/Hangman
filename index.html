@@ -1,21 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- meta -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hangman created during becode exercices as solo project after javascript training">
+    <!-- meta social tag -->
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Hangman">
+    <meta property="og:description" content="lets play hangerman about animal">
+    <meta property="og:url" content="https://fourneauxthibaut.github.io/Hangman/">
+    <meta property="og:site_name" content="fourneauxthibaut.github.io">
+    <!-- links -->
     <link rel="stylesheet" href="./assets/reset.css">
     <link rel="stylesheet" href="./assets/style.css">
     <link rel="shortcut icon" href="./assets/storage/etrier.svg" type="image/x-icon">
-    <title>Hangman</title>
+    <!-- title -->
+    <title>Hangman Game</title>
 </head>
 <body>
     <header>
         <h1>Hangman</h1>
     </header>
-    <main>
+    <main itemscope itemtype="https://schema.org/Game">
         <section class="hangmansImage">
-            <section class="image">
+            <figure class="image">
                 <svg id="head" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 113 172.34">
                     <defs>
                         <style>.cls-1{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:15px;}</style>
@@ -53,12 +64,13 @@
                     </defs>
                     <line class="cls-1" x1="7.5" y1="7.5" x2="82" y2="82"/>
                 </svg>
-            </section>
-            <section class="word">
-                <a href="" id="word" target="_blank" rel="noopener"></a>
-            </section>
+            </figure>
+            <div class="word" itemprop="encoding">
+                <a href="" id="word" class="u-url" target="_blank" rel="noopener"></a>
+            </div>
         </section>
-        <section class="hangmansContent">
+        <section class="hangmansContent" itemprop="accessibilityControl">
+            <h2>Keyboard</h2>
             <ul class="hangmansOutput">
                 <li id="letterA">a</li>
                 <li id="letterB">b</li>
@@ -88,17 +100,17 @@
                 <li id="letterZ">z</li>
             </ul>
             <section class="hangmansInput">
-                <section class="info">
+                <article class="info">
                     <p id="userInfo">You have 6 lives left.</p>
-                </section>
-                <section class="restart">
+                </article>
+                <article class="restart">
                     <button id="reload">Restart</button>
-                </section>
+                </article>
             </section>
         </section>
     </main>
     <footer>
-        <a href="https://github.com/FourneauxThibaut">Fourneaux Thibaut</a>
+        <a class="h-card" href="https://github.com/FourneauxThibaut" itemprop="author">Fourneaux Thibaut</a>
     </footer>
     <script src="./assets/wordList.js"></script>
     <script src="./assets/script.js"></script>

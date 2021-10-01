@@ -127,8 +127,13 @@ main{
         flex-direction: column;
         width: 60%;
 
+        h2{
+            margin-top: 10vh;
+            font-size: 3.5rem;
+        }
+
         .hangmansOutput{
-            padding: 16vh 0 7vh 0;
+            padding: 7vh 0 7vh 0;
             flex-wrap: wrap;
             font-size: 2rem;
             text-transform: uppercase;
